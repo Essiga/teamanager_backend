@@ -1,5 +1,5 @@
 import { Tea } from "./Tea";
-import { UUID } from "./UUID";
+import { UUID } from "./value-objects/UUID";
 import { Vessel } from "./Vessel";
 
 export class session {

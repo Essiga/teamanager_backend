@@ -1,4 +1,4 @@
-import { UUID } from "./UUID";
+import { UUID } from "./value-objects/UUID";
 
 export class Vessel {
     readonly id: UUID;
