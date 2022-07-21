@@ -1,11 +1,8 @@
-class SubType{
-    private name: string;
+export class SubType{
+    readonly name: string;
 
     constructor(name: string){
         this.name = name;
     }
 
-    public getName(): string{
-        return this.name;
-    }
 }

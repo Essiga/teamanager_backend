@@ -1,4 +1,4 @@
-enum TeaType {
+export enum TeaType {
     Green,
     Black,
     Oolong,
