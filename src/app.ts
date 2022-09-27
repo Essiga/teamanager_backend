@@ -5,25 +5,32 @@ const prisma = new PrismaClient;
 console.log("hello from typescript");
 
 
-async function main() {
-    const tea = await prisma.tea.create({
-        data:{
-            name: '2022 Yunnan Sourcing "Ma Zui Shi" Raw Pu-erh Tea Cake',
-            type:  'Sheng',
-            amount: 357,
-            link: 'https://yunnansourcing.com/collections/pu-erh-tea/products/2022-yunnan-sourcing-ma-zui-shi-raw-pu-erh-tea-cake',
-            year: 2022,
-        }
-    })
+async function main(){
+    const tea = await prisma.tea.findMany();
+    console.log(tea);
 }
 
-main()
-  .then(async () => {
-    await prisma.$disconnect()
-  })
-  .catch(async (e) => {
-    console.error(e)
-    await prisma.$disconnect()
-    process.exit(1)
-  })
-export default main
+main();
+
+// async function main() {
+//     const tea = await prisma.tea.create({
+//         data:{
+//             name: '2022 Yunnan Sourcing "Ma Zui Shi" Raw Pu-erh Tea Cake',
+//             type:  'Sheng',
+//             amount: 357,
+//             link: 'https://yunnansourcing.com/collections/pu-erh-tea/products/2022-yunnan-sourcing-ma-zui-shi-raw-pu-erh-tea-cake',
+//             year: 2022,
+//         }
+//     })
+// }
+
+// main()
+//   .then(async () => {
+//     await prisma.$disconnect()
+//   })
+//   .catch(async (e) => {
+//     console.error(e)
+//     await prisma.$disconnect()
+//     process.exit(1)
+//   })
+// export default main
