@@ -1,20 +1,34 @@
-//import {PrismaClient} from '@prisma/client'
+import {PrismaClient} from '.prisma/client'
 import express from 'express';
 
-//const prisma = new PrismaClient;
+const prisma = new PrismaClient;
 
 console.log("hello from typescript");
 
 //const express = require('express')
-const app = express()
-const port = 3000
+const app = express();
+const port = 3000;
+
+async function main(){
+    const tea = await prisma.tea.findMany();
+
+    return tea;
+}
+//main();
 
 app.get('/', (req, res) => {
-    res.send('Hello World!')
+    //res.send('Hello World!');
+    main().then((data) => {
+        console.log(data);
+        res.send(data);
+    }), () => {
+        res.status(418).send("I'm a teapot.")
+    };
+    
   })
 
   app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+    console.log(`Example app listening on port ${port}`);
   })
 
 /* async function main(){
@@ -23,7 +37,6 @@ app.get('/', (req, res) => {
 }
 
 main(); */
-
 
 // async function main() {
 //     const tea = await prisma.tea.create({
@@ -46,4 +59,4 @@ main(); */
 //     await prisma.$disconnect()
 //     process.exit(1)
 //   })
-// export default main
+// export default main */

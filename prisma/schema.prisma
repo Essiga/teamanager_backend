@@ -11,58 +11,57 @@ datasource db {
 }
 
 model Tea {
-  id String @id @default(uuid())
-  name String @db.VarChar(511)
-  type TeaType
-  subTypes SubType[]
+  id          String        @id @default(uuid())
+  name        String        @db.VarChar(511)
+  type        TeaType
+  subTypes    SubType[]
   priceAtDate PriceAtDate[]
-  amount Decimal
-  link String?
-  vendor String?
-  year Int?
-  sessions Session[]
-
+  amount      Decimal
+  link        String?
+  vendor      String?
+  year        Int?
+  sessions    Session[]
 }
 
-model SubType{
-  name String @id
-  tea Tea @relation(fields: [teaId], references: [id])
-  teaId String 
+model SubType {
+  name  String @id
+  tea   Tea    @relation(fields: [teaId], references: [id])
+  teaId String
 }
 
 model PriceAtDate {
-  id Int @id @default(autoincrement())
-  date DateTime @default(now())
-  price Float 
-  tea Tea @relation(fields: [teaId], references: [id])
+  id    Int      @id @default(autoincrement())
+  date  DateTime @default(now())
+  price Float
+  tea   Tea      @relation(fields: [teaId], references: [id])
   teaId String
 }
 
 enum TeaType {
-    Green
-    Black
-    Oolong
-    Sheng
-    Shou
-    Yellow
-    White
-    Heicha
+  Green
+  Black
+  Oolong
+  Sheng
+  Shou
+  Yellow
+  White
+  Heicha
 }
 
 model Session {
-  id String @id @default(uuid())
-  tea Tea @relation(fields: [teaId], references: [id])
-  teaId String
-  date DateTime
-  amount Decimal
-  price Decimal?
-  vessel Vessel @relation(fields: [vesselId], references: [id])
-  vesselId String 
+  id       String   @id @default(uuid())
+  tea      Tea      @relation(fields: [teaId], references: [id])
+  teaId    String
+  date     DateTime
+  amount   Decimal
+  price    Decimal?
+  vessel   Vessel   @relation(fields: [vesselId], references: [id])
+  vesselId String
 }
 
 model Vessel {
-  id String @id @default(uuid())
-  name String
+  id       String    @id @default(uuid())
+  name     String
   capacity Int
-  session Session[]
+  session  Session[]
 }
