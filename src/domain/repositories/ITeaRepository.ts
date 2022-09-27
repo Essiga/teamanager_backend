@@ -1,5 +1,5 @@
 import { PrismaPromise, Tea } from "@prisma/client";
 
-export interface ITeaRepository{
+export interface ITeaRepository {
     viewAllTeas:() => Promise<Tea[]>;
 }
