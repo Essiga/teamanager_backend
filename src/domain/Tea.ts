@@ -1,5 +1,4 @@
 import { RandomUUIDOptions } from "crypto";
-import uuid from "uuid";
 import { SubType } from "./value-objects/SubType";
 import { TeaType } from "./value-objects/TeaType";
 import { UUID } from "./value-objects/UUID";

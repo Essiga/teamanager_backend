@@ -9,3 +9,33 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Tea {
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(511)
+  type TeaType
+
+}
+
+model PriceAtDate {
+  id Int @id @default(autoincrement())
+  date DateTime @default(now())
+  price Float 
+}
+
+model PriceHistory {
+  id Int @id @default(autoincrement())
+  tea Tea
+  prices PriceAtDate[]
+}
+
+enum TeaType {
+    Green
+    Black
+    Oolong
+    Sheng
+    Shou
+    Yellow
+    White
+    Heicha
+}
