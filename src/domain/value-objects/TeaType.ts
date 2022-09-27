@@ -1,10 +1,10 @@
 export enum TeaType {
-    Green,
-    Black,
-    Oolong,
-    Sheng,
-    Shou,
-    Yellow,
-    White,
-    Heicha,
+    Green = 'GREEN',
+    Black = 'BLACK',
+    Oolong = 'OOLONG',
+    Sheng = 'SHENG',
+    Shou = 'SHOU',
+    Yellow = 'YELLOW',
+    White = 'WHITE',
+    Heicha = 'HEICHA',
 }

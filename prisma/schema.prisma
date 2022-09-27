@@ -15,10 +15,11 @@ model Tea {
   name String @db.VarChar(511)
   type TeaType
   subTypes SubType[]
+  priceAtDate PriceAtDate[]
   amount Decimal
-  link String
-  vendor String
-  year Int
+  link String?
+  vendor String?
+  year Int?
   sessions Session[]
 
 }
@@ -33,6 +34,8 @@ model PriceAtDate {
   id Int @id @default(autoincrement())
   date DateTime @default(now())
   price Float 
+  tea Tea @relation(fields: [teaId], references: [id])
+  teaId String
 }
 
 enum TeaType {
@@ -52,7 +55,7 @@ model Session {
   teaId String
   date DateTime
   amount Decimal
-  price Decimal
+  price Decimal?
   vessel Vessel @relation(fields: [vesselId], references: [id])
   vesselId String 
 }
