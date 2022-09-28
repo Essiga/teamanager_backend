@@ -11,6 +11,10 @@ import { IVesselService } from "./application/api/IVesselService";
 import { VesselService } from "./application/VesselService";
 import { IVesselRepository } from "./domain/repositories/IVesselRepository";
 import { VesselRepository } from "./infrastructure/VesselRepository";
+import { SessionService } from "./application/SessionService";
+import { ISessionRepository } from "./domain/repositories/ISessionRepository";
+import { SessionRepository } from "./infrastructure/SessionRepository";
+import { ISessionService } from "./application/api/ISessionService";
 const prisma = new PrismaClient();
 
 const teaRepository: ITeaRepository = new TeaRepository();
@@ -18,6 +22,8 @@ const viewTeaService: IViewTeaService = new ViewTeaService(teaRepository);
 const addTeaService: IAddTeaService = new AddTeaService(teaRepository);
 const vesselRepository: IVesselRepository = new VesselRepository();
 const vesselService: IVesselService = new VesselService(vesselRepository);
+const sessionRepository: ISessionRepository = new SessionRepository();
+const sessionService: ISessionService = new SessionService(sessionRepository);
 
 console.log("hello from typescript");
 const app = express();
@@ -62,6 +68,12 @@ app.get("/viewAllVessels", (req, res) => {
     }), () => {
         res.sendStatus(503);
     }
+})
+
+app.post("/addSession", (req, res) => {
+    console.log("body: ", req.body);
+    sessionService.addSession(req.body);
+    res.sendStatus(200);
 })
 
 app.listen(port, () => {
