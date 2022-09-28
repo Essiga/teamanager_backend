@@ -53,6 +53,15 @@ app.post("/addVessel", (req, res) => {
     console.log("body: ", req.body);
     vesselService.addVessel(req.body);
     res.sendStatus(200);
+});
+
+app.get("/viewAllVessels", (req, res) => {
+    console.log("body: ", req.body);
+    vesselService.viewAllVessels().then((data)  => {
+        res.send(data);
+    }), () => {
+        res.sendStatus(503);
+    }
 })
 
 app.listen(port, () => {
