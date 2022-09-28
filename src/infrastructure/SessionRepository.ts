@@ -9,4 +9,8 @@ export class SessionRepository implements ISessionRepository {
       data: session,
     });
   }
+
+  async viewAllSessions(): Promise<Session[]> {
+    return await this.prisma.session.findMany();
+  }
 }

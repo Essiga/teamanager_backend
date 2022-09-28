@@ -12,4 +12,8 @@ export class SessionService implements ISessionService {
     addSession(session: Session): Promise<void>{
         return this.sessionRepository.addSession(session);
     }
+
+    viewAllSessions(): Promise<Session[]>{
+        return this.sessionRepository.viewAllSessions();
+    }
 }

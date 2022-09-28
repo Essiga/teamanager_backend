@@ -70,10 +70,19 @@ app.get("/viewAllVessels", (req, res) => {
     }
 })
 
+//TODO: Get tea and session info from request and auto calculate price 
 app.post("/addSession", (req, res) => {
     console.log("body: ", req.body);
     sessionService.addSession(req.body);
     res.sendStatus(200);
+})
+
+app.get("/viewAllSessions", (req, res) => {
+    sessionService.viewAllSessions().then((data) => {
+        res.send(data);
+    }), (error: any) => {
+        res.send(error);
+    }
 })
 
 app.listen(port, () => {
