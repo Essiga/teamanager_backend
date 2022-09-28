@@ -2,7 +2,7 @@ import { Tea } from "@prisma/client";
 import { IViewTeaService } from "./api/IViewTeaService";
 import { ITeaRepository } from "../domain/repositories/ITeaRepository"
 
-class ViewTeaService implements IViewTeaService {
+export class ViewTeaService implements IViewTeaService {
 
     readonly teaRepository: ITeaRepository;
     

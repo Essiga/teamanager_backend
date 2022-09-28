@@ -3,7 +3,7 @@ import { resolve } from "path";
 import { ITeaRepository } from "../domain/repositories/ITeaRepository";
 //import { Tea } from "../domain/Tea";
 
-class TeaRepository implements ITeaRepository {
+export class TeaRepository implements ITeaRepository {
   prisma = new PrismaClient();
 
     async viewAllTeas(): Promise<Tea[]> {
