@@ -1,7 +1,8 @@
 import { Tea } from "@prisma/client";
 import { ITeaRepository } from "../domain/repositories/ITeaRepository";
+import { IAddTeaService } from "./api/IAddTeaService";
 
-export class CreateTeaService {
+export class AddTeaService implements IAddTeaService {
     private teaRepository: ITeaRepository;
 
     constructor(teaRepository: ITeaRepository){
