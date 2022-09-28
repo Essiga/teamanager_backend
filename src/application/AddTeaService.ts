@@ -8,7 +8,7 @@ export class CreateTeaService {
         this.teaRepository = teaRepository;
     }
 
-    async createTea(tea: Tea): Promise<void>{
-        this.teaRepository.createTea(tea);
+    async addTea(tea: Tea): Promise<void>{
+        this.teaRepository.addTea(tea);
     }
 }
