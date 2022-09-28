@@ -4,7 +4,7 @@ import { ITeaRepository } from "../domain/repositories/ITeaRepository"
 
 export class ViewTeaService implements IViewTeaService {
 
-    readonly teaRepository: ITeaRepository;
+    private teaRepository: ITeaRepository;
     
     //thanks Johnny
     constructor(teaRepository: ITeaRepository){

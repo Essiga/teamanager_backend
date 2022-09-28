@@ -7,7 +7,12 @@ export class TeaRepository implements ITeaRepository {
   prisma = new PrismaClient();
 
     async viewAllTeas(): Promise<Tea[]> {
-        const teas = await this.prisma.tea.findMany();
-        return teas;
+        return await this.prisma.tea.findMany();
+    }
+
+    async createTea(tea: Tea): Promise<void> {
+        const result = await this.prisma.tea.create({
+            data: tea
+        });
     }
 }
