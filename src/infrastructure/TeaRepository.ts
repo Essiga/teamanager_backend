@@ -4,7 +4,7 @@ import { ITeaRepository } from "../domain/repositories/ITeaRepository";
 //import { Tea } from "../domain/Tea";
 
 export class TeaRepository implements ITeaRepository {
-  prisma = new PrismaClient();
+    private prisma = new PrismaClient();
 
     async viewAllTeas(): Promise<Tea[]> {
         return await this.prisma.tea.findMany();
