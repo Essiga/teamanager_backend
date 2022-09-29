@@ -28,9 +28,13 @@ const vesselService: IVesselService = new VesselService(vesselRepository);
 const sessionRepository: ISessionRepository = new SessionRepository();
 const sessionService: ISessionService = new SessionService(sessionRepository);
 
+const expressOasGenerator = require('express-oas-generator');
+
 const app = express();
 app.use(express.json());
 const port = 3000;
+
+expressOasGenerator.init(app, {});
 
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
@@ -48,9 +52,9 @@ const options = {
 };
 
 const swaggerSpec = swaggerJsdoc(options);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use('/api-myDocs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-app.get('/api-specs', (req, res) => res.json(swaggerSpec))
+app.get('/api-mySpecs', (req, res) => res.json(swaggerSpec))
 
 /**
  * @openapi
@@ -60,6 +64,8 @@ app.get('/api-specs', (req, res) => res.json(swaggerSpec))
  *     responses:
  *       200:
  *         description: Successfully added a new tea.
+ *       500:
+ *         description: Internal server error
  */
 app.post("/addTea", (req, res) => {
     addTeaService.addTea(req.body as Tea).then(
@@ -79,6 +85,12 @@ app.post("/addTea", (req, res) => {
  *     responses:
  *       200:
  *         description: Successfully got all teas.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/api-schemas/Tea'
  */
 app.get("/viewAllTeas", (req, res) => {
     viewTeaService.viewAllTeas().then(
