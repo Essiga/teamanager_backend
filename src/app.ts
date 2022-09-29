@@ -1,20 +1,23 @@
-import { PrismaClient } from ".prisma/client";
-import { Prisma, Tea } from "@prisma/client";
+import {PrismaClient} from ".prisma/client";
+import {Session, Tea, Vessel} from "@prisma/client";
 import express from "express";
-import { IAddTeaService } from "./application/api/IAddTeaService";
-import { IViewTeaService } from "./application/api/IViewTeaService";
-import { AddTeaService } from "./application/AddTeaService";
-import { ViewTeaService } from "./application/ViewTeaService";
-import { ITeaRepository } from "./domain/repositories/ITeaRepository";
-import { TeaRepository } from "./infrastructure/TeaRepository";
-import { IVesselService } from "./application/api/IVesselService";
-import { VesselService } from "./application/VesselService";
-import { IVesselRepository } from "./domain/repositories/IVesselRepository";
-import { VesselRepository } from "./infrastructure/VesselRepository";
-import { SessionService } from "./application/SessionService";
-import { ISessionRepository } from "./domain/repositories/ISessionRepository";
-import { SessionRepository } from "./infrastructure/SessionRepository";
-import { ISessionService } from "./application/api/ISessionService";
+
+import {IAddTeaService} from "./application/api/IAddTeaService";
+import {IViewTeaService} from "./application/api/IViewTeaService";
+import {AddTeaService} from "./application/AddTeaService";
+import {ViewTeaService} from "./application/ViewTeaService";
+import {ITeaRepository} from "./domain/repositories/ITeaRepository";
+import {TeaRepository} from "./infrastructure/TeaRepository";
+import {IVesselService} from "./application/api/IVesselService";
+import {VesselService} from "./application/VesselService";
+import {IVesselRepository} from "./domain/repositories/IVesselRepository";
+import {VesselRepository} from "./infrastructure/VesselRepository";
+import {SessionService} from "./application/SessionService";
+import {ISessionRepository} from "./domain/repositories/ISessionRepository";
+import {SessionRepository} from "./infrastructure/SessionRepository";
+import {ISessionService} from "./application/api/ISessionService";
+
+// noinspection JSUnusedLocalSymbols
 const prisma = new PrismaClient();
 
 const teaRepository: ITeaRepository = new TeaRepository();
@@ -25,71 +28,109 @@ const vesselService: IVesselService = new VesselService(vesselRepository);
 const sessionRepository: ISessionRepository = new SessionRepository();
 const sessionService: ISessionService = new SessionService(sessionRepository);
 
-console.log("hello from typescript");
 const app = express();
 app.use(express.json());
 const port = 3000;
 
-async function createTea(tea: Tea) {
-  const result = await addTeaService.addTea(tea);
-}
+const swaggerJsdoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
 
-function viewAllTeas() {
-  const tea = viewTeaService.viewAllTeas();
+const options = {
+    failOnErrors: true,
+    definition: {
+        openapi: '3.0.0',
+        info: {
+            title: 'Tea Manager',
+            version: '1.0.0',
+        },
+    },
+    apis: ['./src/app.ts'], // files containing annotations
+};
 
-  return tea;
-}
+const swaggerSpec = swaggerJsdoc(options);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
+app.get('/api-specs', (req, res) => res.json(swaggerSpec))
+
+/**
+ * @openapi
+ * /addTea:
+ *   post:
+ *     description: Add a new tea.
+ *     responses:
+ *       200:
+ *         description: Successfully added a new tea.
+ */
 app.post("/addTea", (req, res) => {
-
-    try {
-        createTea(req.body);
-        res.sendStatus(200);
-    } catch (error) {
-        res.sendStatus(503);
-    }
-
+    addTeaService.addTea(req.body as Tea).then(
+        () => {
+            res.sendStatus(200);
+        },
+        (err) => {
+            res.status(res.statusCode).send(err);
+        });
 });
 
+/**
+ * @openapi
+ * /viewAllTeas:
+ *   get:
+ *     description: Get all teas.
+ *     responses:
+ *       200:
+ *         description: Successfully got all teas.
+ */
 app.get("/viewAllTeas", (req, res) => {
-  viewAllTeas().then((data) => {
-    res.send(data);
-  }),
-    () => {
-      res.status(418).send("I'm a teapot");
-    };
+    viewTeaService.viewAllTeas().then(
+        (data) => {
+            res.send(data);
+        },
+        (err) => {
+            res.status(res.statusCode).send(err);
+        });
 });
 
 app.post("/addVessel", (req, res) => {
-    console.log("body: ", req.body);
-    vesselService.addVessel(req.body);
-    res.sendStatus(200);
+    vesselService.addVessel(req.body as Vessel).then(
+        () => {
+            res.sendStatus(200);
+        },
+        (err) => {
+            res.status(res.statusCode).send(err);
+        });
 });
 
 app.get("/viewAllVessels", (req, res) => {
-    console.log("body: ", req.body);
-    vesselService.viewAllVessels().then((data)  => {
-        res.send(data);
-    }), () => {
-        res.sendStatus(503);
-    }
+    vesselService.viewAllVessels().then(
+        (data) => {
+            res.send(data);
+        },
+        (err) => {
+            res.status(res.statusCode).send(err);
+        });
 })
 
-//TODO: Get tea and session info from request and auto calculate price 
+//TODO: Get tea and session info from request and auto calculate price
 app.post("/addSession", (req, res) => {
-    console.log("body: ", req.body);
-    sessionService.addSession(req.body);
-    res.sendStatus(200);
+    sessionService.addSession(req.body as Session).then(
+        () => {
+            res.sendStatus(200);
+        },
+        (err) => {
+            res.status(res.statusCode).send(err);
+        });
 })
 
 app.get("/viewAllSessions", (req, res) => {
-    sessionService.viewAllSessions().then((data) => {
-        res.send(data);
-    }), (error: any) => {
-        res.send(error);
-    }
+    sessionService.viewAllSessions().then(
+        (data) => {
+            res.send(data);
+        },
+        (err) => {
+            res.status(res.statusCode).send(err);
+        });
 })
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+    console.log(`TeaManager listening on port ${port}`);
 });
