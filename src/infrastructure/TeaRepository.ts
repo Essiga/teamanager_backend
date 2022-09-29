@@ -4,15 +4,22 @@ import { ITeaRepository } from "../domain/repositories/ITeaRepository";
 //import { Tea } from "../domain/Tea";
 
 export class TeaRepository implements ITeaRepository {
-    private prisma = new PrismaClient();
+  private prisma = new PrismaClient();
 
-    async viewAllTeas(): Promise<Tea[]> {
-        return await this.prisma.tea.findMany();
-    }
+  async viewAllTeas(): Promise<Tea[]> {
+    return await this.prisma.tea.findMany();
+  }
 
-    async addTea(tea: Tea): Promise<void> {
+  async addTea(tea: Tea): Promise<void> {
+    try {
         const result = await this.prisma.tea.create({
-            data: tea
-        });
+            data: tea,
+          });
+    } catch (error) {
+        console.log(error);
+        
     }
+
+
+  }
 }

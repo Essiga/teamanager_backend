@@ -42,8 +42,13 @@ function viewAllTeas() {
 
 app.post("/addTea", (req, res) => {
 
-  createTea(req.body);
-  res.sendStatus(200);
+    try {
+        createTea(req.body);
+        res.sendStatus(200);
+    } catch (error) {
+        res.sendStatus(503);
+    }
+
 });
 
 app.get("/viewAllTeas", (req, res) => {
