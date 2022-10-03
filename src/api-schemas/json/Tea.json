@@ -14,7 +14,7 @@
       "type": "string"
     },
     "type": {
-      "$ref": "#/TeaType"
+      "$ref": "#/TeaType.json"
     },
     "amount": {
       "type": "integer"

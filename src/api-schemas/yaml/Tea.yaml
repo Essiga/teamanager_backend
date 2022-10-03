@@ -1,0 +1,22 @@
+---
+type: object
+required:
+  - id
+  - name
+  - type
+  - amount
+properties:
+  id:
+    type: string
+  name:
+    type: string
+  type:
+    "$ref": "#/TeaType.yaml"
+  amount:
+    type: integer
+  link:
+    type: string
+  vendor:
+    type: string
+  year:
+    type: integer
