@@ -1,6 +1,10 @@
 post:
   description:
     "Add a new session."
+  tags:
+    - session
+  operationId:
+    "addSession"
   requestBody:
     required: true
     content:

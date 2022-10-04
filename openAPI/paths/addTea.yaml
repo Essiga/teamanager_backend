@@ -1,6 +1,10 @@
 post:
   description:
     "Add a new tea."
+  tags:
+    - tea
+  operationId:
+    "addTea"
   requestBody:
     required: true
     content:

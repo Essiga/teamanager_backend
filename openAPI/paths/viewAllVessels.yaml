@@ -1,6 +1,10 @@
 get:
   description:
     "Get all vessels."
+  tags:
+    - vessel
+  operationId:
+    "viewAllVessels"
   responses:
     200:
       description:

@@ -1,6 +1,10 @@
 post:
   description:
     "Add a new vessel."
+  tags:
+    - vessel
+  operationId:
+    "addVessel"
   requestBody:
     required: true
     content:

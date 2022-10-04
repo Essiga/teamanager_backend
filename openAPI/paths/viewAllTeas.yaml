@@ -1,6 +1,10 @@
 get:
   description:
     "Get all teas."
+  tags:
+    - tea
+  operationId:
+    "viewAllTeas"
   responses:
     200:
       description:

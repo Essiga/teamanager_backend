@@ -1,6 +1,10 @@
 get:
   description:
     "Get all sessions."
+  tags:
+    - session
+  operationId:
+    "viewAllSessions"
   responses:
     200:
       description:
