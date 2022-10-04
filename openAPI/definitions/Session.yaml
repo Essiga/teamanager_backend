@@ -1,0 +1,21 @@
+type: object
+required:
+  - id
+  - teaId
+  - date
+  - amount
+  - vesselId
+properties:
+  id:
+    type: string
+  teaId:
+    type: string
+  date:
+    type: string
+  amount:
+    type: integer
+  price:
+    type: integer
+  vesselId:
+    type: string
+

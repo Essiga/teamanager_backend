@@ -1,16 +1,16 @@
 post:
   description:
-    "Add a new tea."
+    "Add a new session."
   requestBody:
     required: true
     content:
       application/json:
         schema:
-          $ref: '../definitions/Tea.yaml'
+          $ref: '../definitions/Session.yaml'
   responses:
     200:
       description:
-        "Successfully added a new tea."
+        "Successfully created a new session."
       content:
         $ref: '../definitions/DefaultContent.yaml'
     500:

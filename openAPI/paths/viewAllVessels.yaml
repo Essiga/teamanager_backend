@@ -1,19 +1,19 @@
 get:
   description:
-    "Get all teas."
+    "Get all vessels."
   responses:
     200:
       description:
-        "Successfully got all teas."
+        "Successfully got all vessels."
       content:
         application/json:
           schema:
             type: array
             items:
-              $ref: '../definitions/Tea.yaml'
+              $ref: '../definitions/Vessel.yaml'
     404:
       description:
-        "No teas found."
+        "No vessels found."
       content:
         $ref: '../definitions/DefaultContent.yaml'
     500:

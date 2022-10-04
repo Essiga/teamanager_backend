@@ -1,0 +1,12 @@
+type: object
+required:
+  - id
+  - name
+  - capacity
+properties:
+  id:
+    type: string
+  name:
+    type: string
+  capacity:
+    type: integer

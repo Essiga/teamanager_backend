@@ -1,19 +1,19 @@
 get:
   description:
-    "Get all teas."
+    "Get all sessions."
   responses:
     200:
       description:
-        "Successfully got all teas."
+        "Successfully got all sessions."
       content:
         application/json:
           schema:
             type: array
             items:
-              $ref: '../definitions/Tea.yaml'
+              $ref: '../definitions/Session.yaml'
     404:
       description:
-        "No teas found."
+        "No sessions found."
       content:
         $ref: '../definitions/DefaultContent.yaml'
     500:
