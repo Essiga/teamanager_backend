@@ -1,0 +1,4 @@
+/addTea:
+  $ref: './addTea.yaml'
+/viewAllTeas:
+  $ref: './viewAllTeas.yaml'

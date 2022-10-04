@@ -1,0 +1,16 @@
+post:
+  description:
+    "Add a new tea."
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../definitions/Tea.yaml'
+  responses:
+    200:
+      description:
+        "Successfully added a new tea."
+    500:
+      description:
+        "Internal server error."

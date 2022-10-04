@@ -1,0 +1,15 @@
+get:
+  description: Get all teas.
+  responses:
+    200:
+      description:
+        "Successfully got all teas."
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '../definitions/Tea.yaml'
+    500:
+      description:
+        "Internal server error."

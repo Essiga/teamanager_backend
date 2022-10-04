@@ -1,0 +1,4 @@
+Tea:
+  $ref: './Tea.yaml'
+TeaType:
+  $ref: './TeaType.yaml'

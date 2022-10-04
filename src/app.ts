@@ -35,124 +35,114 @@ const router = express.Router();
 
 router.use(express.json());
 
-const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
-const swaggerDefinition = {
-    openapi: '3.0.0',
-    info: {
-        title: 'Tea Manager',
-        version: '1.0.0',
-        description: 'A tea manager to manage teas, YES!'
-    },
-    servers: [{url: '/api'}]
-}
+const resolve = require('json-refs').resolveRefs;
+const YAML = require('js-yaml');
+const fs   = require('fs');
 
-const options = {
-    failOnErrors: true,
-    definition: swaggerDefinition,
-    apis: [
-        path.join(__dirname, '/app.ts'),
-        path.join(__dirname, '/api-schemas/yaml/*.yaml'),
-        path.join(__dirname, '/api-schemas/json/*.json')
-    ],
+/**
+ * Return JSON with resolved references
+ * @param {array | object} root - The structure to find JSON References within (Swagger spec)
+ * @returns {Promise.<JSON>}
+ */
+const multiFileSwagger = (root: any) => {
+    const options = {
+        filter: ['relative', 'remote'],
+        loaderOptions: {
+            processContent: function (res: any, callback: any) {
+                callback(null, YAML.load(res.text));
+            }
+        }
+    };
+
+    return resolve(root, options).then(
+        function (results: any) {
+            return results.resolved;
+        },
+        function (err: any) {
+            console.log(err.stack);
+        }
+    );
 };
 
-const swaggerSpec = swaggerJsdoc(options);
-router.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+(async () => {
 
-router.get('/api-specs', (req, res) => res.json(swaggerSpec))
+    let rootObj = YAML.load(
+        fs.readFileSync(path.resolve(__dirname, "../openAPI/index.yaml"), "utf-8")
+    );
 
-/**
- * @openapi
- * /addTea:
- *   post:
- *     description: Add a new tea.
- *     responses:
- *       200:
- *         description: Successfully added a new tea.
- *       500:
- *         description: Internal server error
- */
-router.post("/addTea", (req, res) => {
-    addTeaService.addTea(req.body as Tea).then(
-        () => {
-            res.sendStatus(200);
-        },
-        (err) => {
-            res.status(res.statusCode).send(err);
-        });
-});
+    let openapiSpecs = await multiFileSwagger(rootObj);
 
-/**
- * @openapi
- * /viewAllTeas:
- *   get:
- *     description: Get all teas.
- *     responses:
- *       200:
- *         description: Successfully got all teas.
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '/api-schemas/json/Tea#'
- */
-router.get("/viewAllTeas", (req, res) => {
-    viewTeaService.viewAllTeas().then(
-        (data) => {
-            res.send(data);
-        },
-        (err) => {
-            res.status(res.statusCode).send(err);
-        });
-});
+    router.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openapiSpecs));
 
-router.post("/addVessel", (req, res) => {
-    vesselService.addVessel(req.body as Vessel).then(
-        () => {
-            res.sendStatus(200);
-        },
-        (err) => {
-            res.status(res.statusCode).send(err);
-        });
-});
+    router.get('/api-specs', (req, res) => res.json(openapiSpecs))
 
-router.get("/viewAllVessels", (req, res) => {
-    vesselService.viewAllVessels().then(
-        (data) => {
-            res.send(data);
-        },
-        (err) => {
-            res.status(res.statusCode).send(err);
-        });
-})
+    router.post("/addTea", (req, res) => {
+        addTeaService.addTea(req.body as Tea).then(
+            () => {
+                res.sendStatus(200);
+            },
+            (err) => {
+                res.status(res.statusCode).send(err);
+            });
+    });
 
-//TODO: Get tea and session info from request and auto calculate price
-router.post("/addSession", (req, res) => {
-    sessionService.addSession(req.body as Session).then(
-        () => {
-            res.sendStatus(200);
-        },
-        (err) => {
-            res.status(res.statusCode).send(err);
-        });
-})
+    router.get("/viewAllTeas", (req, res) => {
+        viewTeaService.viewAllTeas().then(
+            (data) => {
+                res.send(data);
+            },
+            (err) => {
+                res.status(res.statusCode).send(err);
+            });
+    });
 
-router.get("/viewAllSessions", (req, res) => {
-    sessionService.viewAllSessions().then(
-        (data) => {
-            res.send(data);
-        },
-        (err) => {
-            res.status(res.statusCode).send(err);
-        });
-})
+    router.post("/addVessel", (req, res) => {
+        vesselService.addVessel(req.body as Vessel).then(
+            () => {
+                res.sendStatus(200);
+            },
+            (err) => {
+                res.status(res.statusCode).send(err);
+            });
+    });
 
-app.use('/api', router);
+    router.get("/viewAllVessels", (req, res) => {
+        vesselService.viewAllVessels().then(
+            (data) => {
+                res.send(data);
+            },
+            (err) => {
+                res.status(res.statusCode).send(err);
+            });
+    })
 
-const port = 3000;
-app.listen(port, () => {
-    console.log(`TeaManager listening on port ${port}`);
-});
+    //TODO: Get tea and session info from request and auto calculate price
+    router.post("/addSession", (req, res) => {
+        sessionService.addSession(req.body as Session).then(
+            () => {
+                res.sendStatus(200);
+            },
+            (err) => {
+                res.status(res.statusCode).send(err);
+            });
+    })
+
+    router.get("/viewAllSessions", (req, res) => {
+        sessionService.viewAllSessions().then(
+            (data) => {
+                res.send(data);
+            },
+            (err) => {
+                res.status(res.statusCode).send(err);
+            });
+    })
+
+    app.use('/api', router);
+
+    const port = 3000;
+    app.listen(port, () => {
+        console.log(`TeaManager listening on port ${port}`);
+    });
+})();
