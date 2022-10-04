@@ -3,6 +3,6 @@ info:
   $ref: './openAPI/info/index.yaml#'
 paths:
   $ref: './openAPI/paths/index.yaml'
-definitions:
-  $ref: './openAPI/definitions/index.yaml'
+components:
+  $ref: './openAPI/components/index.yaml'
 servers: [ { url: '/api' } ]

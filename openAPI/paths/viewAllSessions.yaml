@@ -14,14 +14,14 @@ get:
           schema:
             type: array
             items:
-              $ref: '../definitions/Session.yaml'
+              $ref: '../components/Session.yaml'
     404:
       description:
         "No sessions found."
       content:
-        $ref: '../definitions/DefaultContent.yaml'
+        $ref: '../components/DefaultContent.yaml'
     500:
       description:
         "Internal server error."
       content:
-        $ref: '../definitions/DefaultContent.yaml'
+        $ref: '../components/DefaultContent.yaml'

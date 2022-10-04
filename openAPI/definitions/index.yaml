@@ -1,8 +1,0 @@
-Tea:
-  $ref: './Tea.yaml'
-TeaType:
-  $ref: './TeaType.yaml'
-Vessel:
-  $ref: './Vessel.yaml'
-Session:
-  $ref: './Session.yaml'

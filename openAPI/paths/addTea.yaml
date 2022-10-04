@@ -10,15 +10,15 @@ post:
     content:
       application/json:
         schema:
-          $ref: '../definitions/Tea.yaml'
+          $ref: '../components/Tea.yaml'
   responses:
     200:
       description:
         "Successfully added a new tea."
       content:
-        $ref: '../definitions/DefaultContent.yaml'
+        $ref: '../components/DefaultContent.yaml'
     500:
       description:
         "Internal server error."
       content:
-        $ref: '../definitions/DefaultContent.yaml'
+        $ref: '../components/DefaultContent.yaml'

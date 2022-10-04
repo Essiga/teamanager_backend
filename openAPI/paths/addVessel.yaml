@@ -10,15 +10,15 @@ post:
     content:
       application/json:
         schema:
-          $ref: '../definitions/Vessel.yaml'
+          $ref: '../components/Vessel.yaml'
   responses:
     200:
       description:
         "Successfully created a new vessel."
       content:
-        $ref: '../definitions/DefaultContent.yaml'
+        $ref: '../components/DefaultContent.yaml'
     500:
       description:
         "Internal server error."
       content:
-        $ref: '../definitions/DefaultContent.yaml'
+        $ref: '../components/DefaultContent.yaml'

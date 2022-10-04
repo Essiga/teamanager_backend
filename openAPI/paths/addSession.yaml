@@ -10,15 +10,15 @@ post:
     content:
       application/json:
         schema:
-          $ref: '../definitions/Session.yaml'
+          $ref: '../components/Session.yaml'
   responses:
     200:
       description:
         "Successfully created a new session."
       content:
-        $ref: '../definitions/DefaultContent.yaml'
+        $ref: '../components/DefaultContent.yaml'
     500:
       description:
         "Internal server error."
       content:
-        $ref: '../definitions/DefaultContent.yaml'
+        $ref: '../components/DefaultContent.yaml'

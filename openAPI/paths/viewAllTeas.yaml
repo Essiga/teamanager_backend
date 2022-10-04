@@ -14,14 +14,14 @@ get:
           schema:
             type: array
             items:
-              $ref: '../definitions/Tea.yaml'
+              $ref: '../components/Tea.yaml'
     404:
       description:
         "No teas found."
       content:
-        $ref: '../definitions/DefaultContent.yaml'
+        $ref: '../components/DefaultContent.yaml'
     500:
       description:
         "Internal server error."
       content:
-        $ref: '../definitions/DefaultContent.yaml'
+        $ref: '../components/DefaultContent.yaml'

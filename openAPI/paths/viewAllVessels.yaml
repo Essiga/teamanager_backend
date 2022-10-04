@@ -14,14 +14,14 @@ get:
           schema:
             type: array
             items:
-              $ref: '../definitions/Vessel.yaml'
+              $ref: '../components/Vessel.yaml'
     404:
       description:
         "No vessels found."
       content:
-        $ref: '../definitions/DefaultContent.yaml'
+        $ref: '../components/DefaultContent.yaml'
     500:
       description:
         "Internal server error."
       content:
-        $ref: '../definitions/DefaultContent.yaml'
+        $ref: '../components/DefaultContent.yaml'
