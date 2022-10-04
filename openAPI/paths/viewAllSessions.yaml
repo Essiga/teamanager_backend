@@ -14,7 +14,7 @@ get:
           schema:
             type: array
             items:
-              $ref: '../components/Session.yaml'
+              $ref: '#/components/schemas/Session'
     404:
       description:
         "No sessions found."

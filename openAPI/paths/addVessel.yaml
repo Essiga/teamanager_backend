@@ -10,7 +10,7 @@ post:
     content:
       application/json:
         schema:
-          $ref: '../components/Vessel.yaml'
+          $ref: '#/components/schemas/Vessel'
   responses:
     200:
       description:

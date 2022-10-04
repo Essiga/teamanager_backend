@@ -10,7 +10,7 @@ post:
     content:
       application/json:
         schema:
-          $ref: '../components/Tea.yaml'
+          $ref: '#/components/schemas/Tea'
   responses:
     200:
       description:

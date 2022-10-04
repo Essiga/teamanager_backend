@@ -14,7 +14,7 @@ get:
           schema:
             type: array
             items:
-              $ref: '../components/Vessel.yaml'
+              $ref: '#/components/schemas/Vessel'
     404:
       description:
         "No vessels found."
