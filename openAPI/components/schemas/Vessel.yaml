@@ -1,8 +1,4 @@
 type: object
-required:
-  - id
-  - name
-  - capacity
 properties:
   id:
     type: string
@@ -10,3 +6,6 @@ properties:
     type: string
   capacity:
     type: integer
+required:
+  - name
+  - capacity

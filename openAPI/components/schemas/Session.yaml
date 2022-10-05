@@ -1,10 +1,4 @@
 type: object
-required:
-  - id
-  - teaId
-  - date
-  - amount
-  - vesselId
 properties:
   id:
     type: string
@@ -18,4 +12,8 @@ properties:
     type: integer
   vesselId:
     type: string
-
+required:
+  - teaId
+  - date
+  - amount
+  - vesselId

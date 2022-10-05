@@ -1,9 +1,4 @@
 type: object
-required:
-  - id
-  - name
-  - type
-  - amount
 properties:
   id:
     type: string
@@ -11,6 +6,8 @@ properties:
     type: string
   type:
     $ref: '#/components/schemas/TeaType'
+  price:
+    type: number
   amount:
     type: integer
   link:
@@ -19,3 +16,8 @@ properties:
     type: string
   year:
     type: integer
+required:
+  - name
+  - type
+  - price
+  - amount
