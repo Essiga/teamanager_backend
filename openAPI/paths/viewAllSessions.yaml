@@ -16,12 +16,8 @@ get:
             items:
               $ref: '#/components/schemas/Session'
     404:
-      description:
-        "No sessions found."
-      content:
-        $ref: '../components/DefaultContent.yaml'
+      $ref: "#/components/responses/NotFound"
     500:
-      description:
-        "Internal server error."
-      content:
-        $ref: '../components/DefaultContent.yaml'
+      $ref: "#/components/responses/InternalServerError"
+    default:
+      $ref: "#/components/responses/DefaultError"

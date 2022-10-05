@@ -1,0 +1,6 @@
+description:
+  "Unexpected error."
+content:
+  text/html:
+    schema:
+      type: string

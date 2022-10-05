@@ -10,7 +10,7 @@ properties:
   name:
     type: string
   type:
-    $ref: "./TeaType.yaml"
+    $ref: '#/components/schemas/TeaType'
   amount:
     type: integer
   link:

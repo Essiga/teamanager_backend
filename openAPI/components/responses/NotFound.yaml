@@ -1,0 +1,6 @@
+description:
+  "The specified resource was not found."
+content:
+  text/html:
+    schema:
+      type: string

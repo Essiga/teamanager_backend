@@ -1,0 +1,6 @@
+NotFound:
+  $ref: './NotFound.yaml'
+InternalServerError:
+  $ref: './InternalServerError.yaml'
+DefaultError:
+  $ref: './DefaultError.yaml'
