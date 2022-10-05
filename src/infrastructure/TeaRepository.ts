@@ -1,18 +1,20 @@
-import { PrismaClient, PrismaPromise, Tea } from "@prisma/client";
-import { resolve } from "path";
-import { ITeaRepository } from "../domain/repositories/ITeaRepository";
-//import { Tea } from "../domain/Tea";
+import {PrismaClient, Tea} from "@prisma/client";
+import {ITeaRepository} from "../domain/repositories/ITeaRepository";
 
 export class TeaRepository implements ITeaRepository {
-  prisma = new PrismaClient();
+    private prisma = new PrismaClient();
+
+    async addTea(tea: Tea): Promise<void> {
+        try {
+            await this.prisma.tea.create({
+                data: tea,
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     async viewAllTeas(): Promise<Tea[]> {
         return await this.prisma.tea.findMany();
-    }
-
-    async addTea(tea: Tea): Promise<void> {
-        const result = await this.prisma.tea.create({
-            data: tea
-        });
     }
 }

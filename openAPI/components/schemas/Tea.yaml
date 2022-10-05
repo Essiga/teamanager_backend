@@ -1,0 +1,25 @@
+type: object
+properties:
+  id:
+    type: string
+  name:
+    type: string
+  type:
+    $ref: '#/components/schemas/TeaType'
+  subType:
+    type: string
+  price:
+    type: number
+  amount:
+    type: integer
+  link:
+    type: string
+  vendor:
+    type: string
+  year:
+    type: integer
+required:
+  - name
+  - type
+  - price
+  - amount
