@@ -1,6 +1,6 @@
-import { Session } from "@prisma/client";
+import {Session} from "@prisma/client";
 
 export interface ISessionRepository {
-    addSession:(session: Session) => Promise<void>;
-    viewAllSessions:() => Promise<Session[]>;
+    addSession: (session: Session) => Promise<void>;
+    viewAllSessions: () => Promise<Session[]>;
 }

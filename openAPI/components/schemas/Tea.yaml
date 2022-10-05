@@ -6,6 +6,8 @@ properties:
     type: string
   type:
     $ref: '#/components/schemas/TeaType'
+  subType:
+    type: string
   price:
     type: number
   amount:

@@ -1,6 +1,6 @@
 import {Tea} from "@prisma/client";
 
-export interface ITeaRepository {
-    viewAllTeas: () => Promise<Tea[]>;
+export interface ITeaService {
     addTea: (tea: Tea) => Promise<void>;
+    viewAllTeas: () => Promise<Tea[]>;
 }

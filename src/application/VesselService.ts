@@ -1,11 +1,12 @@
-import { Vessel } from "@prisma/client";
-import { IVesselRepository } from "../domain/repositories/IVesselRepository";
-import { IVesselService } from "./api/IVesselService";
+import {Vessel} from "@prisma/client";
+import {IVesselRepository} from "../domain/repositories/IVesselRepository";
+import {IVesselService} from "./api/IVesselService";
 
-export class VesselService implements IVesselService{
+export class VesselService implements IVesselService {
+
     private vesselRepository: IVesselRepository;
 
-    constructor(vesselRepository: IVesselRepository){
+    constructor(vesselRepository: IVesselRepository) {
         this.vesselRepository = vesselRepository;
     }
 
@@ -16,5 +17,4 @@ export class VesselService implements IVesselService{
     viewAllVessels(): Promise<Vessel[]> {
         return this.vesselRepository.viewAllVessels();
     }
-
 }

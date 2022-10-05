@@ -1,13 +1,17 @@
-import { PrismaClient, Vessel } from "@prisma/client";
-import { IVesselRepository } from "../domain/repositories/IVesselRepository";
+import {PrismaClient, Vessel} from "@prisma/client";
+import {IVesselRepository} from "../domain/repositories/IVesselRepository";
 
-export class VesselRepository implements IVesselRepository{
+export class VesselRepository implements IVesselRepository {
     private prisma = new PrismaClient();
 
     async addVessel(vessel: Vessel): Promise<void> {
-        await this.prisma.vessel.create({
-            data: vessel
-        })
+        try {
+            await this.prisma.vessel.create({
+                data: vessel
+            });
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     async viewAllVessels(): Promise<Vessel[]> {

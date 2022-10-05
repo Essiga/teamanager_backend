@@ -2,10 +2,8 @@ import {PrismaClient} from ".prisma/client";
 import {Session, Tea, Vessel} from "@prisma/client";
 import express from "express";
 
-import {IAddTeaService} from "./application/api/IAddTeaService";
-import {IViewTeaService} from "./application/api/IViewTeaService";
-import {AddTeaService} from "./application/AddTeaService";
-import {ViewTeaService} from "./application/ViewTeaService";
+import {ITeaService} from "./application/api/ITeaService";
+import {TeaService} from "./application/TeaService";
 import {ITeaRepository} from "./domain/repositories/ITeaRepository";
 import {TeaRepository} from "./infrastructure/TeaRepository";
 import {IVesselService} from "./application/api/IVesselService";
@@ -21,8 +19,7 @@ import {ISessionService} from "./application/api/ISessionService";
 const prisma = new PrismaClient();
 
 const teaRepository: ITeaRepository = new TeaRepository();
-const viewTeaService: IViewTeaService = new ViewTeaService(teaRepository);
-const addTeaService: IAddTeaService = new AddTeaService(teaRepository);
+const teaService: ITeaService = new TeaService(teaRepository);
 const vesselRepository: IVesselRepository = new VesselRepository();
 const vesselService: IVesselService = new VesselService(vesselRepository);
 const sessionRepository: ISessionRepository = new SessionRepository();
@@ -39,7 +36,7 @@ const swaggerUi = require('swagger-ui-express');
 
 const resolve = require('json-refs').resolveRefs;
 const YAML = require('js-yaml');
-const fs   = require('fs');
+const fs = require('fs');
 
 /**
  * Return JSON with resolved references
@@ -79,7 +76,7 @@ const multiFileSwagger = (root: any) => {
     router.get('/api-specs', (req, res) => res.json(openapiSpecs))
 
     router.post("/addTea", (req, res) => {
-        addTeaService.addTea(req.body as Tea).then(
+        teaService.addTea(req.body as Tea).then(
             () => {
                 res.sendStatus(200);
             },
@@ -89,7 +86,7 @@ const multiFileSwagger = (root: any) => {
     });
 
     router.get("/viewAllTeas", (req, res) => {
-        viewTeaService.viewAllTeas().then(
+        teaService.viewAllTeas().then(
             (data) => {
                 res.send(data);
             },
