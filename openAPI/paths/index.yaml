@@ -1,0 +1,12 @@
+/addTea:
+  $ref: './addTea.yaml'
+/viewAllTeas:
+  $ref: './viewAllTeas.yaml'
+/addVessel:
+  $ref: './addVessel.yaml'
+/viewAllVessels:
+  $ref: './viewAllVessels.yaml'
+/addSession:
+  $ref: './addSession.yaml'
+/viewAllSessions:
+  $ref: './viewAllSessions.yaml'

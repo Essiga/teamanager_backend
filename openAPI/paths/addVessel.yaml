@@ -1,0 +1,27 @@
+post:
+  description:
+    "Add a new vessel."
+  tags:
+    - vessel
+  operationId:
+    "addVessel"
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/Vessel'
+  responses:
+    200:
+      description:
+        "Successfully created a new vessel."
+      content:
+        text/html:
+          schema:
+            type: string
+    404:
+      $ref: "#/components/responses/NotFound"
+    500:
+      $ref: "#/components/responses/InternalServerError"
+    default:
+      $ref: "#/components/responses/DefaultError"

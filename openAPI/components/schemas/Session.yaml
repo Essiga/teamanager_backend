@@ -1,0 +1,19 @@
+type: object
+properties:
+  id:
+    type: string
+  teaId:
+    type: string
+  date:
+    type: string
+  amount:
+    type: integer
+  price:
+    type: integer
+  vesselId:
+    type: string
+required:
+  - teaId
+  - date
+  - amount
+  - vesselId

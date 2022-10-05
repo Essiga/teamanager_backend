@@ -11,22 +11,31 @@ datasource db {
 }
 
 model Tea {
-  id Int @id @default(autoincrement())
+  id String @id @default(uuid())
   name String @db.VarChar(511)
   type TeaType
+  subTypes SubType[]
+  priceAtDate PriceAtDate[]
+  amount Decimal
+  link String?
+  vendor String?
+  year Int?
+  sessions Session[]
 
+}
+
+model SubType{
+  name String @id
+  tea Tea @relation(fields: [teaId], references: [id])
+  teaId String 
 }
 
 model PriceAtDate {
   id Int @id @default(autoincrement())
   date DateTime @default(now())
   price Float 
-}
-
-model PriceHistory {
-  id Int @id @default(autoincrement())
-  tea Tea
-  prices PriceAtDate[]
+  tea Tea @relation(fields: [teaId], references: [id])
+  teaId String
 }
 
 enum TeaType {
@@ -38,4 +47,22 @@ enum TeaType {
     Yellow
     White
     Heicha
+}
+
+model Session {
+  id String @id @default(uuid())
+  tea Tea @relation(fields: [teaId], references: [id])
+  teaId String
+  date DateTime
+  amount Decimal
+  price Decimal?
+  vessel Vessel @relation(fields: [vesselId], references: [id])
+  vesselId String 
+}
+
+model Vessel {
+  id String @id @default(uuid())
+  name String
+  capacity Int
+  session Session[]
 }

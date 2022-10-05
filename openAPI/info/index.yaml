@@ -1,0 +1,5 @@
+title: 'Tea Manager'
+version: '1.0.0'
+description: 'A tea manager to manage teas, YES!'
+license:
+  name: 'MIT license'

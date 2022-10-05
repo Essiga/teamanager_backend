@@ -1,0 +1,4 @@
+insert into "Tea" values ('1', '2022 Yunnan Sourcing "Yi Shan Mo" Yi Wu Ancient Arbor Raw Pu-erh Tea Cake', 'Sheng', 200, 'https://yunnansourcing.com/collections/pu-erh-tea/products/2022-yunnan-sourcing-yi-shan-mo-yi-wu-ancient-arbor-raw-pu-erh-tea-cake', 'YunnanSourcing', 2022);
+insert into "Tea" values ('2', '2005 Liming "Liming Zhi Guang" Raw Pu-erh Tea Cake', 'Sheng', 357, 'https://yunnansourcing.com/collections/pu-erh-tea/products/2005-liming-liming-zhi-guang-raw-pu-erh-tea-cake', 'YunnanSourcing', 2005);
+insert into "Tea" values ('3', '2022 GINGERBREAD MAN', 'Shou', 200, 'https://white2tea.com/collections/latest-additions/products/2022-gingerbread-man', 'White2Tea', 2022);
+insert into "Tea" values ('4', '2007 CLASSIC MUSHROOM', 'Sheng', 250, 'https://white2tea.com/collections/2012-white2tea-raw-puer/products/2007-classic-mushroom', 'White2Tea', 2007);
