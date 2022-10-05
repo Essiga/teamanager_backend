@@ -1,6 +1,6 @@
 openapi: '3.0.3'
 info:
-  $ref: './openAPI/info/index.yaml#'
+  $ref: './openAPI/info/index.yaml'
 paths:
   $ref: './openAPI/paths/index.yaml'
 components:
