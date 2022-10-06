@@ -1,6 +1,7 @@
 import {PrismaClient} from ".prisma/client";
 import {Session, Tea, Vessel} from "@prisma/client";
 import express from "express";
+import bodyParser from "body-parser";
 
 import {ITeaService} from "./application/api/ITeaService";
 import {TeaService} from "./application/TeaService";
@@ -30,7 +31,8 @@ import path from 'path';
 const app = express();
 const router = express.Router();
 
-router.use(express.json());
+let jsonParser = bodyParser.json();
+let textParser = bodyParser.text()
 
 const swaggerUi = require('swagger-ui-express');
 
@@ -75,7 +77,7 @@ const multiFileSwagger = (root: any) => {
 
     router.get('/api-specs', (req, res) => res.json(openapiSpecs))
 
-    router.post("/addTea", (req, res) => {
+    router.post("/addTea", jsonParser, (req, res) => {
         teaService.addTea(req.body as Tea).then(
             () => {
                 res.sendStatus(200);
@@ -95,7 +97,7 @@ const multiFileSwagger = (root: any) => {
             });
     });
 
-    router.post("/addVessel", (req, res) => {
+    router.post("/addVessel", jsonParser, (req, res) => {
         vesselService.addVessel(req.body as Vessel).then(
             () => {
                 res.sendStatus(200);
@@ -115,8 +117,19 @@ const multiFileSwagger = (root: any) => {
             });
     })
 
+    router.post("/deleteVessel", textParser, (req, res) => {
+        console.log('log', req.body)
+        vesselService.deleteVessel(req.body as string).then(
+            () => {
+                res.sendStatus(200);
+            },
+            (err) => {
+                res.status(res.statusCode).send(err);
+            });
+    });
+
     //TODO: Get tea and session info from request and auto calculate price
-    router.post("/addSession", (req, res) => {
+    router.post("/addSession", jsonParser, (req, res) => {
         sessionService.addSession(req.body as Session).then(
             () => {
                 res.sendStatus(200);

@@ -1,20 +1,20 @@
 post:
   description:
-    "Add a new tea."
+    "Delete vessel."
   tags:
-    - tea
+    - vessel
   operationId:
-    "addTea"
+    "deleteVessel"
   requestBody:
     required: true
     content:
-      application/json:
+      text/plain:
         schema:
-          $ref: '#/components/schemas/Tea'
+          type: string
   responses:
     200:
       description:
-        "Successfully added a new tea."
+        "Successfully deleted vessel."
       content:
         text/plain:
           schema:

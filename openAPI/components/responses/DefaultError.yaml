@@ -1,6 +1,6 @@
 description:
   "Unexpected error."
 content:
-  text/html:
+  text/plain:
     schema:
       type: string
