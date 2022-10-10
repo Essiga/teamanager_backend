@@ -6,12 +6,10 @@ properties:
     type: string
   type:
     $ref: '#/components/schemas/TeaType'
-  subType:
-    type: string
   price:
     type: number
   amount:
-    type: integer
+    type: number
   link:
     type: string
   vendor:
@@ -21,5 +19,4 @@ properties:
 required:
   - name
   - type
-  - price
   - amount
