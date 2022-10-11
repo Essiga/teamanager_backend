@@ -97,6 +97,17 @@ const multiFileSwagger = (root: any) => {
             });
     });
 
+    router.post("/updateTea", jsonParser, (req, res) => {
+        teaService.updateTea(req.body as Tea).then(
+        () => {
+            res.sendStatus(200);
+        },
+            (err) => {
+                res.status(res.statusCode).send(err);
+            });
+        });
+
+
     router.post("/addVessel", jsonParser, (req, res) => {
         vesselService.addVessel(req.body as Vessel).then(
             () => {

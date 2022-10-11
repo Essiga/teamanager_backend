@@ -16,4 +16,7 @@ export class TeaService implements ITeaService {
     viewAllTeas(): Promise<Tea[]> {
         return this.teaRepository.viewAllTeas();
     }
+    async updateTea(tea:Tea){
+        return this.teaRepository.addTea(tea);
+    }
 }
