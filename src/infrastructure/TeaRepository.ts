@@ -1,5 +1,6 @@
 import {PrismaClient, Tea} from "@prisma/client";
 import {ITeaRepository} from "../domain/repositories/ITeaRepository";
+import {Decimal} from "@prisma/client/runtime";
 
 export class TeaRepository implements ITeaRepository {
     private prisma = new PrismaClient();
@@ -12,6 +13,20 @@ export class TeaRepository implements ITeaRepository {
         } catch (error) {
             console.log(error);
         }
+    }
+
+    async subtractAmount(teaId: string, amount: Decimal){
+        console.log(amount);
+        return await this.prisma.tea.update({
+            where: {
+                id: teaId
+            },
+            data: {
+                amount: {
+                    decrement: amount
+                }
+            }
+        })
     }
 
     async viewAllTeas(): Promise<Tea[]> {

@@ -24,7 +24,7 @@ const teaService: ITeaService = new TeaService(teaRepository);
 const vesselRepository: IVesselRepository = new VesselRepository();
 const vesselService: IVesselService = new VesselService(vesselRepository);
 const sessionRepository: ISessionRepository = new SessionRepository();
-const sessionService: ISessionService = new SessionService(sessionRepository);
+const sessionService: ISessionService = new SessionService(sessionRepository, teaRepository);
 
 import path from 'path';
 

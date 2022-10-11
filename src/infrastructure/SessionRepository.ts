@@ -5,6 +5,7 @@ export class SessionRepository implements ISessionRepository {
     private prisma = new PrismaClient();
 
     async addSession(session: Session): Promise<void> {
+
         try {
             await this.prisma.session.create({
                 data: session,
