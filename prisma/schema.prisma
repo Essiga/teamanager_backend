@@ -14,28 +14,12 @@ model Tea {
   id String @id @default(uuid())
   name String @db.VarChar(511)
   type TeaType
-  subTypes SubType[]
-  priceAtDate PriceAtDate[]
+  price Decimal?
   amount Decimal
   link String?
   vendor String?
   year Int?
   sessions Session[]
-
-}
-
-model SubType{
-  name String @id
-  tea Tea @relation(fields: [teaId], references: [id])
-  teaId String 
-}
-
-model PriceAtDate {
-  id Int @id @default(autoincrement())
-  date DateTime @default(now())
-  price Float 
-  tea Tea @relation(fields: [teaId], references: [id])
-  teaId String
 }
 
 enum TeaType {
@@ -57,7 +41,7 @@ model Session {
   amount Decimal
   price Decimal?
   vessel Vessel @relation(fields: [vesselId], references: [id])
-  vesselId String 
+  vesselId String
 }
 
 model Vessel {

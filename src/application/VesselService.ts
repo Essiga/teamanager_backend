@@ -17,4 +17,8 @@ export class VesselService implements IVesselService {
     viewAllVessels(): Promise<Vessel[]> {
         return this.vesselRepository.viewAllVessels();
     }
+
+    deleteVessel(id: string): Promise<void> {
+        return this.vesselRepository.deleteVessel(id);
+    }
 }

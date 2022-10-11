@@ -16,7 +16,7 @@ post:
       description:
         "Successfully created a new vessel."
       content:
-        text/html:
+        text/plain:
           schema:
             type: string
     404:

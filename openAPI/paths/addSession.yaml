@@ -16,7 +16,7 @@ post:
       description:
         "Successfully created a new session."
       content:
-        text/html:
+        text/plain:
           schema:
             type: string
     404:

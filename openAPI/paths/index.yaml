@@ -6,6 +6,8 @@
   $ref: './addVessel.yaml'
 /viewAllVessels:
   $ref: './viewAllVessels.yaml'
+/deleteVessel:
+  $ref: './deleteVessel.yaml'
 /addSession:
   $ref: './addSession.yaml'
 /viewAllSessions:

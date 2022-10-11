@@ -17,4 +17,16 @@ export class VesselRepository implements IVesselRepository {
     async viewAllVessels(): Promise<Vessel[]> {
         return await this.prisma.vessel.findMany();
     }
+
+    async deleteVessel(id: string): Promise<void> {
+        try {
+            await this.prisma.vessel.delete({
+                where: {
+                    id: id
+                }
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
 }

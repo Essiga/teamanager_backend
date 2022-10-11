@@ -1,6 +1,6 @@
 description:
   "Internal server error."
 content:
-  text/html:
+  text/plain:
     schema:
       type: string
