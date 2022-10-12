@@ -1,0 +1,27 @@
+post:
+  description:
+    "Get Tea by Id"
+  tags:
+    - tea
+  operationId:
+    "getTeaById"
+  requestBody:
+    required: true
+    content:
+      text/plain:
+        schema:
+          type: string
+  responses:
+    200:
+      description:
+        "Successfully loaded tea."
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Tea'
+    404:
+      $ref: "#/components/responses/NotFound"
+    500:
+      $ref: "#/components/responses/InternalServerError"
+    default:
+      $ref: "#/components/responses/DefaultError"
