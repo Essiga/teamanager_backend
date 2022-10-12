@@ -32,4 +32,8 @@ export class TeaRepository implements ITeaRepository {
     async viewAllTeas(): Promise<Tea[]> {
         return await this.prisma.tea.findMany();
     }
+
+    async getTeaById(teaId: string): Promise<Tea> {
+        return await this.prisma.tea.findUnique({where: {id: teaId}})  || {} as Tea;
+    }
 }

@@ -4,6 +4,8 @@ properties:
     type: string
   teaId:
     type: string
+  teaName:
+    type: string
   date:
     type: string
   amount:

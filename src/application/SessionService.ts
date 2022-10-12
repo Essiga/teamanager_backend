@@ -2,6 +2,7 @@ import {Session} from "@prisma/client";
 import {ISessionRepository} from "../domain/repositories/ISessionRepository";
 import {ISessionService} from "./api/ISessionService";
 import {ITeaRepository} from "../domain/repositories/ITeaRepository";
+import {SessionDTO} from "./dtos/SessionDTO";
 
 export class SessionService implements ISessionService {
 
@@ -18,7 +19,16 @@ export class SessionService implements ISessionService {
         return this.sessionRepository.addSession(session);
     }
 
-    viewAllSessions(): Promise<Session[]> {
-        return this.sessionRepository.viewAllSessions();
+    async viewAllSessions(): Promise<SessionDTO[]> {
+        let sessions = await this.sessionRepository.viewAllSessions();
+        let sessionDTOs: SessionDTO[] = [];
+        for (let i = 0; i < sessions.length; i++) {
+            sessionDTOs.push(sessions[i]);
+            let tea = await this.teaRepository.getTeaById(sessions[i].teaId);
+            sessionDTOs[i].teaName = tea.name;
+
+        }
+
+        return sessionDTOs
     }
 }
