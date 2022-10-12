@@ -28,7 +28,7 @@ export class SessionService implements ISessionService {
             sessionDTOs[i].teaName = tea.name;
 
         }
-
+        console.log(sessionDTOs);
         return sessionDTOs
     }
 }

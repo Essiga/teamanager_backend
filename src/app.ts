@@ -96,6 +96,15 @@ const multiFileSwagger = (root: any) => {
                 res.status(res.statusCode).send(err);
             });
     });
+    router.get("/getTeaById", (req, res) => {
+        teaService.getTeaById(req.body).then(
+            (data) => {
+                res.send(data);
+            },
+            (err) => {
+                res.status(res.statusCode).send(err);
+            });
+    });
 
     router.post("/updateTea", jsonParser, (req, res) => {
         console.log(req.body)
