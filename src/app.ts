@@ -98,14 +98,15 @@ const multiFileSwagger = (root: any) => {
     });
 
     router.post("/updateTea", jsonParser, (req, res) => {
+        console.log(req.body)
         teaService.updateTea(req.body as Tea).then(
-        () => {
-            res.sendStatus(200);
-        },
+            () => {
+                res.sendStatus(200);
+            },
             (err) => {
                 res.status(res.statusCode).send(err);
             });
-        });
+    });
 
 
     router.post("/addVessel", jsonParser, (req, res) => {

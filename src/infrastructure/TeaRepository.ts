@@ -35,11 +35,9 @@ export class TeaRepository implements ITeaRepository {
 
     async updateTea(tea: Tea): Promise<void>{
         try {
-            await this.prisma.tea.updateMany({
+            await this.prisma.tea.update({
                 where: {
-                    id: {
-                        contains: tea.id,
-                    },
+                    id: tea.id
                 },
                 data: tea,
         });

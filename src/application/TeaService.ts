@@ -17,6 +17,6 @@ export class TeaService implements ITeaService {
         return this.teaRepository.viewAllTeas();
     }
     async updateTea(tea:Tea){
-        return this.teaRepository.addTea(tea);
+        return this.teaRepository.updateTea(tea);
     }
 }
