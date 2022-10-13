@@ -22,13 +22,14 @@ export class SessionService implements ISessionService {
     async viewAllSessions(): Promise<SessionDTO[]> {
         let sessions = await this.sessionRepository.viewAllSessions();
         let sessionDTOs: SessionDTO[] = [];
+
         for (let i = 0; i < sessions.length; i++) {
             sessionDTOs.push(sessions[i]);
+
             let tea = await this.teaRepository.getTeaById(sessions[i].teaId);
             sessionDTOs[i].teaName = tea.name;
-
         }
-        console.log(sessionDTOs);
+
         return sessionDTOs
     }
 }
