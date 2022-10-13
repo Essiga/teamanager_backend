@@ -1,0 +1,27 @@
+post:
+  description:
+    "Update tea."
+  tags:
+    - tea
+  operationId:
+    "updateTea"
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/Tea'
+  responses:
+    200:
+      description:
+        "Successfully updated tea."
+      content:
+        text/plain:
+          schema:
+            type: string
+    404:
+      $ref: "#/components/responses/NotFound"
+    500:
+      $ref: "#/components/responses/InternalServerError"
+    default:
+      $ref: "#/components/responses/DefaultError"

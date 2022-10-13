@@ -2,6 +2,8 @@
   $ref: './addTea.yaml'
 /viewAllTeas:
   $ref: './viewAllTeas.yaml'
+/updateTea:
+  $ref: './updateTea.yaml'
 /addVessel:
   $ref: './addVessel.yaml'
 /viewAllVessels:
@@ -12,3 +14,5 @@
   $ref: './addSession.yaml'
 /viewAllSessions:
   $ref: './viewAllSessions.yaml'
+/getTeaById:
+  $ref: './getTeaById.yaml'

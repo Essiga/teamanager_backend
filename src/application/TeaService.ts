@@ -13,7 +13,14 @@ export class TeaService implements ITeaService {
         return this.teaRepository.addTea(tea);
     }
 
+    async getTeaById(teaId: string): Promise<Tea>{
+        return this.teaRepository.getTeaById(teaId);
+    }
+
     viewAllTeas(): Promise<Tea[]> {
         return this.teaRepository.viewAllTeas();
+    }
+    async updateTea(tea:Tea){
+        return this.teaRepository.updateTea(tea);
     }
 }

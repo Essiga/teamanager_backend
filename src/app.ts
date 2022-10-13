@@ -1,7 +1,7 @@
-import {PrismaClient} from ".prisma/client";
 import {Session, Tea, Vessel} from "@prisma/client";
 import express from "express";
 import bodyParser from "body-parser";
+import path from 'path';
 
 import {ITeaService} from "./application/api/ITeaService";
 import {TeaService} from "./application/TeaService";
@@ -16,17 +16,13 @@ import {ISessionRepository} from "./domain/repositories/ISessionRepository";
 import {SessionRepository} from "./infrastructure/SessionRepository";
 import {ISessionService} from "./application/api/ISessionService";
 
-// noinspection JSUnusedLocalSymbols
-const prisma = new PrismaClient();
-
 const teaRepository: ITeaRepository = new TeaRepository();
 const teaService: ITeaService = new TeaService(teaRepository);
 const vesselRepository: IVesselRepository = new VesselRepository();
 const vesselService: IVesselService = new VesselService(vesselRepository);
 const sessionRepository: ISessionRepository = new SessionRepository();
-const sessionService: ISessionService = new SessionService(sessionRepository);
+const sessionService: ISessionService = new SessionService(sessionRepository, teaRepository);
 
-import path from 'path';
 
 const app = express();
 const router = express.Router();
@@ -46,6 +42,7 @@ const fs = require('fs');
  * @returns {Promise.<JSON>}
  */
 const multiFileSwagger = (root: any) => {
+    // noinspection JSUnusedGlobalSymbols
     const options = {
         filter: ['relative', 'remote'],
         loaderOptions: {
@@ -96,6 +93,26 @@ const multiFileSwagger = (root: any) => {
                 res.status(res.statusCode).send(err);
             });
     });
+    router.post("/getTeaById", textParser, (req, res) => {
+        teaService.getTeaById(req.body).then(
+            (data) => {
+                res.send(data);
+            },
+            (err) => {
+                res.status(res.statusCode).send(err);
+            });
+    });
+
+    router.post("/updateTea", jsonParser, (req, res) => {
+        teaService.updateTea(req.body as Tea).then(
+            () => {
+                res.sendStatus(200);
+            },
+            (err) => {
+                res.status(res.statusCode).send(err);
+            });
+    });
+
 
     router.post("/addVessel", jsonParser, (req, res) => {
         vesselService.addVessel(req.body as Vessel).then(
@@ -118,7 +135,6 @@ const multiFileSwagger = (root: any) => {
     })
 
     router.post("/deleteVessel", textParser, (req, res) => {
-        console.log('log', req.body)
         vesselService.deleteVessel(req.body as string).then(
             () => {
                 res.sendStatus(200);
@@ -128,7 +144,6 @@ const multiFileSwagger = (root: any) => {
             });
     });
 
-    //TODO: Get tea and session info from request and auto calculate price
     router.post("/addSession", jsonParser, (req, res) => {
         sessionService.addSession(req.body as Session).then(
             () => {
